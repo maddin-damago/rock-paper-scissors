@@ -1,0 +1,117 @@
+document.addEventListener("DOMContentLoaded", () => {
+    const points = document.getElementById("points");
+    const scissors = document.getElementById("scissors");
+    const stone = document.getElementById("stone");
+    const paper = document.getElementById("paper");
+    const fightBtn = document.getElementById("fight");
+    const domChoices = document.getElementById("choices");
+    const gurko = document.getElementById("gurko");
+    const veggi = document.getElementById("veggi");
+    const choices = ["scissors", "stone", "paper"];
+    let userPoints = 0;
+    let aiPoints = 0;
+    let userChoice = "";
+    scissors.addEventListener("click", () => {
+        userChoice = "scissors";
+        if (scissors.classList.contains("picked")) {
+            userChoice = "";
+        }
+        scissors.classList.toggle("picked");
+        stone.classList.remove("picked");
+        paper.classList.remove("picked");
+        fightButton();
+    });
+    stone.addEventListener("click", () => {
+        userChoice = "stone";
+        if (stone.classList.contains("picked")) {
+            userChoice = "";
+        }
+        stone.classList.toggle("picked");
+        scissors.classList.remove("picked");
+        paper.classList.remove("picked");
+        fightButton();
+    });
+    paper.addEventListener("click", () => {
+        userChoice = "paper";
+        if (paper.classList.contains("picked")) {
+            userChoice = "";
+        }
+        paper.classList.toggle("picked");
+        stone.classList.remove("picked");
+        scissors.classList.remove("picked");
+        fightButton();
+    });
+    fightBtn.addEventListener("click", () => {
+        const rand = Math.floor(Math.random() * 3);
+        const aiChoice = choices[rand] || "";
+        domChoices.textContent = `User picked: ${userChoice} - AI picked: ${aiChoice}`;
+        checkRound(aiChoice);
+        points.textContent = `${userPoints} : ${aiPoints}`;
+        fightBtn.blur();
+        if (userPoints === 3) {
+            winningDuh("PLAYER WON");
+        }
+        if (aiPoints === 3) {
+            winningDuh("AI WON");
+        }
+        gurko.addEventListener("animationend", () => {
+            gurko.classList.remove("gurko");
+        }, { once: true });
+        veggi.addEventListener("animationend", () => {
+            veggi.classList.remove("gurko");
+        }, { once: true });
+    });
+    function fightButton() {
+        if (userChoice) {
+            fightBtn.disabled = false;
+        }
+        else {
+            fightBtn.disabled = true;
+        }
+    }
+    function checkRound(aiChoice) {
+        if (userChoice === "scissors" && aiChoice === "paper") {
+            userPoints++;
+            gurko.classList.add("gurko");
+        }
+        else if (userChoice === "scissors" && aiChoice === "stone") {
+            aiPoints++;
+            veggi.classList.add("gurko");
+        }
+        else if (userChoice === "stone" && aiChoice === "scissors") {
+            userPoints++;
+            gurko.classList.add("gurko");
+        }
+        else if (userChoice === "stone" && aiChoice === "paper") {
+            aiPoints++;
+            veggi.classList.add("gurko");
+        }
+        else if (userChoice === "paper" && aiChoice === "stone") {
+            userPoints++;
+            gurko.classList.add("gurko");
+        }
+        else if (userChoice === "paper" && aiChoice === "scissors") {
+            aiPoints++;
+            veggi.classList.add("gurko");
+        }
+        else {
+            domChoices.textContent = "DRAW!";
+        }
+    }
+    function winningDuh(whoWon) {
+        setTimeout(() => {
+            alert(whoWon);
+            points.textContent = "0 : 0";
+            userPoints = 0;
+            aiPoints = 0;
+            userChoice = "";
+        }, 1000);
+        fightBtn.disabled = true;
+        domChoices.textContent = "";
+        paper.classList.remove("picked");
+        stone.classList.remove("picked");
+        scissors.classList.remove("picked");
+    }
+});
+export {};
+//# sourceMappingURL=scriptRPS.js.map

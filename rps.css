@@ -1,0 +1,135 @@
+*,
+::before,
+::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+main {
+  max-width: 500px;
+  width: 80vw;
+  margin: auto;
+}
+
+#points {
+  font-size: 48px;
+  font-weight: bold;
+  text-align: center;
+}
+
+#arena {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.heros {
+  width: 200px;
+}
+
+.gurko {
+  display: inline-block;
+  animation: move 0.3s linear forwards;
+}
+
+@keyframes move {
+  0% {
+    transform: scale(1.2) rotate(60deg);
+  }
+  20% {
+    transform: scale(1.4) rotate(120deg);
+  }
+  40% {
+    transform: scale(1.6) rotate(180deg);
+  }
+  60% {
+    transform: scale(1.8) rotate(240deg);
+  }
+  80% {
+    transform: scale(2) rotate(300deg);
+  }
+  100% {
+    transform: scale(1) rotate(360deg);
+  }
+}
+
+#skills {
+  width: 400px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 1rem;
+  gap: 5px;
+}
+
+.skill {
+  width: 50px;
+  border: 1px solid darkgoldenrod;
+  cursor: pointer;
+}
+
+.picked {
+  border: 2px solid green;
+}
+
+#fight-section {
+  width: 80vw;
+  display: flex;
+  max-width: 500px;
+}
+
+button {
+  margin: 2rem auto;
+  padding: 20px 40px;
+  font-size: 24px;
+  background-color: crimson;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 1px 1px 2px rgb(103, 19, 36);
+  color: white;
+  text-shadow: 1px 1px 1px black;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:focus {
+  animation: btn 0.2s linear;
+}
+
+@keyframes btn {
+  0% {
+    transform: translateX(-20%);
+  }
+  25% {
+    transform: translateX(30%);
+  }
+  50% {
+    transform: translateX(-30%);
+  }
+  75% {
+    transform: translateX(20%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+button:disabled {
+  background-color: lightgray;
+  cursor: not-allowed;
+}
+
+#choices {
+  width: 80vw;
+  max-width: 500px;
+  height: 100px;
+  display: flex;
+  border: 1px solid darkcyan;
+  border-radius: 10px;
+  box-shadow: 1px 1px 2px rgb(6, 41, 41);
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+}
